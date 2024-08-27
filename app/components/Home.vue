@@ -18,9 +18,19 @@ export default Vue.extend({
   methods: {
     tapped(args) {
       console.log("Button was pressed");
-      new Star.Discovery().searchBluetoothLE().catch((err) => {
-        console.log(err);
-      });
+      try {
+       (new Star.Discovery().searchBluetooth())
+        .then((res) => {
+          console.log("Success");
+        })
+        .catch((err) => {
+          console.log('-error');
+          console.log(err);
+        });
+      } catch (error) {
+        console.log('--error');
+        console.log(error);
+      }
     },
   },
   computed: {
