@@ -1,43 +1,34 @@
 <template>
   <Page>
     <ActionBar>
-      <Label text="Home"/>
+      <Label text="Home" />
     </ActionBar>
 
     <GridLayout>
-      <Label class="info">
-        <FormattedString>
-          <Span class="fas" text.decode="&#xf135; "/>
-          <Span :text="message"/>
-        </FormattedString>
-      </Label>
+      <Button @tap="tapped" text="TEST" />
     </GridLayout>
   </Page>
 </template>
 
 <script lang="ts">
-  import Vue from "nativescript-vue";
+var Star = require("nativescript-print-star");
+import Vue from "nativescript-vue";
 
-  export default Vue.extend({
-    computed: {
-      message() {
-        return "Blank {N}-Vue app";
-      }
-    }
-  });
+export default Vue.extend({
+  methods: {
+    tapped(args) {
+      console.log("Button was pressed");
+      new Star.Discovery().searchBluetoothLE().catch((err) => {
+        console.log(err);
+      });
+    },
+  },
+  computed: {
+    message() {
+      return "Blank {N}-Vue app";
+    },
+  },
+});
 </script>
 
-<style scoped lang="scss">
-  @import '@nativescript/theme/scss/variables/blue';
 
-  // Custom styles
-  .fas {
-    @include colorize($color: accent);
-  }
-
-  .info {
-    font-size: 20;
-    horizontal-align: center;
-    vertical-align: center;
-  }
-</style>
